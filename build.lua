@@ -3,11 +3,6 @@
 
 module = "auxhook"
 
-installfiles = {
-'*.sty',
-'*.dtx','*.pdf'
-}
-
 
 textfiles = {"README.md"}
 unpackfiles = {'auxhook.dtx'}
