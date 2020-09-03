@@ -1,12 +1,12 @@
 % \iffalse meta-comment
 %
 % File: auxhook.dtx
-% Version: 2019-12-17 v1.6
+% Version: 2020-09-03 v1.7
 % Info: Hooks for auxiliary files
 %
 % Copyright (C)
 %    2006, 2007, 2009, 2011 Heiko Oberdiek
-%    2016-2019 Oberdiek Package Support Group
+%    2016-2020 Oberdiek Package Support Group
 %    https://github.com/ho-tex/auxhook/issues
 %
 % This work may be distributed and/or modified under the
@@ -27,7 +27,8 @@
 %
 % This work consists of the main source file auxhook.dtx
 % and the derived files
-%    auxhook.sty, auxhook.pdf, auxhook.ins, auxhook.drv.
+%    auxhook.sty, auxhook-2019-12-17.sty,
+%    auxhook.pdf, auxhook.ins, auxhook.drv.
 %
 % Distribution:
 %    CTAN:macros/latex/contrib/auxhook/auxhook.dtx
@@ -61,6 +62,7 @@
 %
 % Installation:
 %    TDS:tex/latex/auxhook/auxhook.sty
+%    TDS:tex/latex/auxhook/auxhook-2019-12-17.sty
 %    TDS:doc/latex/auxhook/auxhook.pdf
 %    TDS:source/latex/auxhook/auxhook.dtx
 %
@@ -79,7 +81,7 @@
 \input docstrip.tex
 \Msg{************************************************************************}
 \Msg{* Installation}
-\Msg{* Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)}
+\Msg{* Package: auxhook 2020-09-03 v1.7 Hooks for auxiliary files (HO)}
 \Msg{************************************************************************}
 
 \keepsilent
@@ -91,11 +93,11 @@
 This is a generated file.
 
 Project: auxhook
-Version: 2019-12-17 v1.6
+Version: 2020-09-03 v1.7
 
 Copyright (C)
    2006, 2007, 2009, 2011 Heiko Oberdiek
-   2016-2019 Oberdiek Package Support Group
+   2016-2020 Oberdiek Package Support Group
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either
@@ -116,7 +118,8 @@ https://github.com/ho-tex/auxhook/issues
 
 This work consists of the main source file auxhook.dtx
 and the derived files
-   auxhook.sty, auxhook.pdf, auxhook.ins, auxhook.drv.
+    auxhook.sty, auxhook-2019-12-17.sty,
+    auxhook.pdf, auxhook.ins, auxhook.drv.
 
 \endpreamble
 \let\MetaPrefix\DoubleperCent
@@ -136,7 +139,7 @@ and the derived files
 \Msg{* To finish the installation you have to move the following}
 \Msg{* file into a directory searched by TeX:}
 \Msg{*}
-\Msg{*     auxhook.sty}
+\Msg{*     auxhook.sty, auxhook-2019-12-17.sty}
 \Msg{*}
 \Msg{* To produce the documentation run the file `auxhook.drv'}
 \Msg{* through LaTeX.}
@@ -153,7 +156,7 @@ and the derived files
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{auxhook.drv}%
-  [2019-12-17 v1.6 Hooks for auxiliary files (HO)]%
+  [2020-09-03 v1.7 Hooks for auxiliary files (HO)]%
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \begin{document}
@@ -167,7 +170,7 @@ and the derived files
 % \GetFileInfo{auxhook.drv}
 %
 % \title{The \xpackage{auxhook} package}
-% \date{2019-12-17 v1.6}
+% \date{2020-09-03 v1.7}
 % \author{Heiko Oberdiek\thanks
 % {Please report any issues at \url{https://github.com/ho-tex/auxhook/issues}}}
 %
@@ -196,34 +199,7 @@ and the derived files
 % that silently disables the macros of the package
 % if the package is no longer in use.
 %
-% In case of the main auxiliary file, \cs{AtBeginDocument} can be used
-% for this purpose. Especially if several packages are involved, the
-% order cannot be controlled always (e.g., see package
-% \xpackage{hypdestopt} that hooks into \xpackage{hyperref}'s macros).
-% And there isn't any hook for the auxiliary files of the \cs{include}
-% feature.
-%
-% Thus this package patches \LaTeX's macros \cs{document} and
-% \cs{@include} to add the hooks where the auxiliary files
-% are opend and the first line with \cs{relax} is written.
-%
-% The patching can fail, if these macros are redefined by some
-% other package. If the other package still uses the original
-% definition, then load package \xpackage{auxhook} earlier.
-% (With \cs{RequirePackage} the package also can be loaded before
-% the class). If the redefinition doesn't use the original meaning,
-% then you can try to load package \xpackage{auxhook} afterwards,
-% but you need luck that the patch succeeds.
-%
-% The hooks are macros:
-% \begin{description}
-%   \item[\cs{@beginmainauxhook}:] Start of the main auxiliary file.
-%     The hook is called after the first line with \cs{relax} is written.
-%   \item[\cs{@beginpartauxhook}:] The same for the auxiliary files
-%     that belongs to the files that are included by \cs{include}.
-% \end{description}
-% If you want to add something to these hooks, you can use
-% \cs{g@addto@macro} from \LaTeX's kernel. But the package provides
+% The package provides
 % macros to add code that adds a line to the auxiliary file:
 %
 % \begin{declcs}{AddLineBeginMainAux}\,\M{line}\\
@@ -237,6 +213,45 @@ and the derived files
 %
 % Examples, see packages \xpackage{hypdestopt} (\cite{hypdestopt}) and
 % \xpackage{zref} (\cite{zref}).
+%
+% \subsection{New behaviour with \LaTeX 2020/10/01}
+% Starting\marginpar{Breaking change!} with \LaTeX\ 2020/10/01 the user commands
+% will make use of the new hook management provided by \LaTeX.
+% Code should be added only through the user command documented above.
+% \cs{@beginmainauxhook} and \cs{@beginpartauxhook} documented below will
+% not be used anymore.
+%
+% \subsection{Behaviour with older \LaTeX}
+%
+% With older \LaTeX\ no kernel hooks are available.
+% In case of the main auxiliary file, \cs{AtBeginDocument} can be used
+% for this purpose. Especially if several packages are involved, the
+% order cannot be controlled always (e.g., see package
+% \xpackage{hypdestopt} that hooks into \xpackage{hyperref}'s macros).
+% And there isn't any hook for the auxiliary files of the \cs{include}
+% feature.
+%
+% Thus this package patches \LaTeX's macros \cs{document} and
+% \cs{@include} to add the hooks where the auxiliary files
+% are opened and the first line with \cs{relax} is written.
+%
+% The patching can fail, if these macros are redefined by some
+% other package. If the other package still uses the original
+% definition, then load package \xpackage{auxhook} earlier.
+% (With \cs{RequirePackage} the package also can be loaded before
+% the class). If the redefinition doesn't use the original meaning,
+% then you can try to load package \xpackage{auxhook} afterwards,
+% but you need luck that the patch succeeds.
+%
+% The hooks are macros\marginpar{deprecated!}:
+% \begin{description}
+%   \item[\cs{@beginmainauxhook}:] Start of the main auxiliary file.
+%     The hook is called after the first line with \cs{relax} is written.
+%   \item[\cs{@beginpartauxhook}:] The same for the auxiliary files
+%     that belongs to the files that are included by \cs{include}.
+% \end{description}
+% The use of these hooks is deprecated. Use only the user commands documentated
+% above to stay compatible with future \LaTeX\ versions.
 %
 % \StopEventually{
 % }
@@ -646,6 +661,9 @@ and the derived files
 %   \end{Version}
 %   \begin{Version}{2019-12-17 v1.6}
 %   \item Updated
+%   \end{Version}
+%   \begin{Version}{2020-09-03 v1.7}
+%   \item Updated to use the new hook management.
 %   \end{Version}
 % \end{History}
 %
