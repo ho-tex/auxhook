@@ -126,6 +126,7 @@ and the derived files
   \file{auxhook.drv}{\from{auxhook.dtx}{driver}}%
   \usedir{tex/latex/auxhook}%
   \file{auxhook.sty}{\from{auxhook.dtx}{package}}%
+  \file{auxhook-2019-12-17.sty}{\from{auxhook.dtx}{packagefrozen}}%
 }
 
 \catcode32=13\relax% active space
@@ -241,14 +242,54 @@ and the derived files
 % }
 %
 % \section{Implementation}
-%
-% \subsection{Identification}
-%
 %    \begin{macrocode}
 %<*package>
+%    \end{macrocode}
+% \subsection{v.1.7: New implementation using the LaTeX kernel hooks}
+% At first the identification and fallback code for older LaTeX version:
+%    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{auxhook}%
-  [2019-12-17 v1.6 Hooks for auxiliary files (HO)]%
+\ProvidesPackage{auxhook}[2019-12-17 v1.6 Hooks for auxiliary files (HO)]%
+\providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+\IfFormatAtLeastTF{2020/10/01}{}{\input{auxhook-2019-12-17.sty}}
+\IfFormatAtLeastTF{2020/10/01}{}{\endinput}
+%    \end{macrocode}
+% The KOMA classes test for an internal command. So we provide it:
+%    \begin{macrocode}
+% % to make KOMA happy ...
+\let\@beginmainauxhook\relax
+\let\@beginpartauxhook\relax
+%    \end{macrocode}
+% Now the new definitions of the user commands. Testing against
+% \cs{@begindocumenthook} is a bit against the spirit of the new hook system,
+% but a better test is currently missing.
+%    \begin{macrocode}
+\NewDocumentCommand\AddLineBeginMainAux{m}
+  {%
+   \ifx\@begindocumenthook\@undefined
+        \if@filesw
+          \PackageInfo{auxhook}
+            {%
+              \@backslashchar AddLineBeginMainAux comes a little late,
+              \MessageBreak
+              because the main .aux file is already opened
+            }%
+        \fi
+    \fi
+    \AddToHook{begindocument}{\immediate\write\@mainaux{#1}}%
+  }
+
+\NewDocumentCommand\AddLineBeginPartAux{m}
+  {\AddToHook{include/before}{\immediate\write\@partaux{#1}}}
+
+\NewDocumentCommand\AddLineBeginAux{m}
+  {\AddLineBeginMainAux{#1}\AddLineBeginPartAux{#1}}
+%    \end{macrocode}
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%    \begin{macrocode}
+%<*packagefrozen>
 %    \end{macrocode}
 %
 % \subsection{Hook setup}
@@ -395,7 +436,7 @@ and the derived files
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</package>
+%</packagefrozen>
 %    \end{macrocode}
 %
 % \section{Installation}
