@@ -264,14 +264,14 @@ and the derived files
 % At first the identification and fallback code for older LaTeX version:
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{auxhook}[2019-12-17 v1.6 Hooks for auxiliary files (HO)]%
+\ProvidesPackage{auxhook}[2020-09-03 v1.7 Hooks for auxiliary files (HO)]%
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2020/10/01}{}{\input{auxhook-2019-12-17.sty}}
 \IfFormatAtLeastTF{2020/10/01}{}{\endinput}
 %    \end{macrocode}
-% The KOMA classes test for an internal command. So we provide it:
+% The following commands are documented and used in test by the KOMA classes.
+% So we provide them, but in the new version there are no longer used as hooks.
 %    \begin{macrocode}
-% % to make KOMA happy ...
 \let\@beginmainauxhook\relax
 \let\@beginpartauxhook\relax
 %    \end{macrocode}
