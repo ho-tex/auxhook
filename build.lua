@@ -7,8 +7,6 @@ module = "auxhook"
 textfiles = {"README.md"}
 unpackfiles = {'auxhook.dtx'}
 
-packtdszip  = true
-
 maxprintline=10000
 checkruns = 2
 checkengines={"pdftex"}
