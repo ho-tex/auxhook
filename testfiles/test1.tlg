@@ -1,0 +1,54 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \duckA=macro:
+->dinner.
+l. ...\show\duckA
+                 \show\duckB \show\duckC \show\duckD \show\Bear
+> \duckB=macro:
+->breakfast.
+l. ...\show\duckA \show\duckB
+                             \show\duckC \show\duckD \show\Bear
+> \duckC=macro:
+->breakfast+dinner.
+l. ...\show\duckA \show\duckB \show\duckC
+                                         \show\duckD \show\Bear
+> \duckD=macro:
+->lunch.
+l. ......\duckA \show\duckB \show\duckC \show\duckD
+                                                   \show\Bear
+> \Bear=undefined.
+l. ......w\duckB \show\duckC \show\duckD \show\Bear
+Package auxhook Info: \AddLineBeginMainAux comes a little late,
+(auxhook)             because the main .aux file is already opened on input line ....
+[1
+]
+(testinclude.tex
+> \duckA=macro:
+->dinner.
+l. ...hungry? \show\duckA
+                        \show\duckB \show\duckC \show\duckD
+> \duckB=macro:
+->breakfast.
+l. ...hungry? \show\duckA \show\duckB
+                                    \show\duckC \show\duckD
+> \duckC=macro:
+->breakfast+dinner.
+l. ...hungry? \show\duckA \show\duckB \show\duckC
+                                                \show\duckD
+> \duckD=macro:
+->lunch.
+l. ......w\duckA \show\duckB \show\duckC \show\duckD
+) [2
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line ....
+Package atveryend Info: Empty hook `AfterLastShipout' on input line ....
+(test1.aux
+> \duckA=macro:
+->dinner.
+l. ...\show\duckA
+> \duckB=macro:
+->breakfast.
+l. ...\show\duckB
+(testinclude.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line ....
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line ....
