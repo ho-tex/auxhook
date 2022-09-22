@@ -1,12 +1,12 @@
 % \iffalse meta-comment
 %
 % File: auxhook.dtx
-% Version: 2020-09-03 v1.7
+% Version: 2022-09-22 v1.7
 % Info: Hooks for auxiliary files
 %
 % Copyright (C)
 %    2006, 2007, 2009, 2011 Heiko Oberdiek
-%    2016-2020 Oberdiek Package Support Group
+%    2016-2022 Oberdiek Package Support Group
 %    https://github.com/ho-tex/auxhook/issues
 %
 % This work may be distributed and/or modified under the
@@ -81,7 +81,7 @@
 \input docstrip.tex
 \Msg{************************************************************************}
 \Msg{* Installation}
-\Msg{* Package: auxhook 2020-09-03 v1.7 Hooks for auxiliary files (HO)}
+\Msg{* Package: auxhook 2022-09-22 v1.7 Hooks for auxiliary files (HO)}
 \Msg{************************************************************************}
 
 \keepsilent
@@ -93,7 +93,7 @@
 This is a generated file.
 
 Project: auxhook
-Version: 2020-09-03 v1.7
+Version: 2022-09-22 v1.7
 
 Copyright (C)
    2006, 2007, 2009, 2011 Heiko Oberdiek
@@ -156,7 +156,7 @@ and the derived files
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{auxhook.drv}%
-  [2020-09-03 v1.7 Hooks for auxiliary files (HO)]%
+  [2022-09-22 v1.7 Hooks for auxiliary files (HO)]%
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \begin{document}
@@ -170,7 +170,7 @@ and the derived files
 % \GetFileInfo{auxhook.drv}
 %
 % \title{The \xpackage{auxhook} package}
-% \date{2020-09-03 v1.7}
+% \date{2022-09-22 v1.7}
 % \author{Heiko Oberdiek\thanks
 % {Please report any issues at \url{https://github.com/ho-tex/auxhook/issues}}}
 %
@@ -250,7 +250,7 @@ and the derived files
 %   \item[\cs{@beginpartauxhook}:] The same for the auxiliary files
 %     that belongs to the files that are included by \cs{include}.
 % \end{description}
-% The use of these hooks is deprecated. Use only the user commands documentated
+% The use of these hooks is deprecated. Use only the user commands documented
 % above to stay compatible with future \LaTeX\ versions.
 %
 % \StopEventually{
@@ -264,7 +264,7 @@ and the derived files
 % At first the identification and fallback code for older LaTeX version:
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{auxhook}[2020-09-03 v1.7 Hooks for auxiliary files (HO)]%
+\ProvidesPackage{auxhook}[2022-09-22 v1.7 Hooks for auxiliary files (HO)]%
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2020/10/01}{}{\input{auxhook-2019-12-17.sty}}
 \IfFormatAtLeastTF{2020/10/01}{}{\endinput}
@@ -285,9 +285,9 @@ and the derived files
         \if@filesw
           \PackageInfo{auxhook}
             {%
-              \@backslashchar AddLineBeginMainAux comes a little late,
+              \@backslashchar AddLineBeginMainAux comes a little late,%
               \MessageBreak
-              because the main .aux file is already opened
+              because the main .aux file is already opened%
             }%
         \fi
     \fi
@@ -643,7 +643,7 @@ and the derived files
 %   \begin{Version}{2019-12-17 v1.6}
 %   \item Updated
 %   \end{Version}
-%   \begin{Version}{2020-09-03 v1.7}
+%   \begin{Version}{2022-09-22 v1.7}
 %   \item Updated to use the new hook management.
 %   \end{Version}
 % \end{History}
