@@ -39,10 +39,7 @@ l. ...hungry? \show\duckA \show\duckB \show\duckC
 ->lunch.
 l. ......w\duckA \show\duckB \show\duckC \show\duckD
 ) [2
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line ....
-Package atveryend Info: Empty hook `AfterLastShipout' on input line ....
-(test1.aux
+] (test1.aux
 > \duckA=macro:
 ->dinner.
 l. ...\show\duckA
@@ -50,5 +47,3 @@ l. ...\show\duckA
 ->breakfast.
 l. ...\show\duckB
 (testinclude.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line ....
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line ....
